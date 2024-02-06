@@ -18,7 +18,7 @@ const Map: React.FC<MapProps> = ({ coordinates }) => {
     <div key={key} className="mt-20">
       <MapContainer
         center={[coordinates.latitude, coordinates.longitude]}
-        zoom={7}
+        zoom={5}
         style={{ height: "500px", width: "650px", borderRadius: "10px" }}
       >
         <TileLayer
