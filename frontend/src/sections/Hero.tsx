@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { MapPin } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -15,15 +15,19 @@ const Hero: React.FC = () => {
     latitude: 0,
     longitude: 0,
   });
+  const [enteredText, setEnteredText] = useState("");
 
   const handlePredict = async () => {
+
+
+
     try {
       const response = await fetch("http://localhost:5000/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query: "your_query_here" }),
+        body: JSON.stringify({ query: enteredText }),
       });
 
       if (!response.ok) {
@@ -55,7 +59,7 @@ const Hero: React.FC = () => {
           Enter the text you want to find the location it came from.
         </p>
 
-        <Textarea />
+        <Textarea placeholder="Enter your text here" value={enteredText} onChange={e => setEnteredText(e.target.value)} />
         <Button className="mt-10" onClick={handlePredict}>
           Get Location <MapPin className="ml-2 h-4 w-4" />
         </Button>
