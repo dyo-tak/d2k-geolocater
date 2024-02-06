@@ -1,12 +1,20 @@
-import HeroBackground from "@/components/HeroBackground";
-import { Textarea } from "@/components/ui/textarea";
+import React, { useState } from "react";
 import { MapPin } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import Map from "@/components/Map";
 
-const Hero = () => {
-  const [response, setResponse] = useState(null);
+interface Coordinates {
+  latitude: number;
+  longitude: number;
+}
+
+const Hero: React.FC = () => {
+  const [response, setResponse] = useState<any>(null);
+  const [coordinates, setCoordinates] = useState<Coordinates>({
+    latitude: 0,
+    longitude: 0,
+  });
 
   const handlePredict = async () => {
     try {
@@ -24,15 +32,18 @@ const Hero = () => {
 
       const data = await response.json();
       setResponse(data);
+
+      setCoordinates({
+        latitude: data.latitude,
+        longitude: data.longitude,
+      });
     } catch (error: any) {
       console.error("Error:", error.message);
     }
   };
 
   return (
-    <section
-      className="w-full flex xl:flex-row flex-col justify-center min-h-screen gap-10 max-container"
-    >
+    <section className="w-full flex xl:flex-row flex-col justify-center min-h-screen gap-10 max-container">
       <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full  max-xl:padding-x">
         <h1 className="font-palanquin text-6xl max-sm:text-[72px] max-sm:leading-[82px] font-bold">
           <span className="xl:bg-white xl:whitespace-nowrap relative z-10 pr-10">
@@ -44,15 +55,14 @@ const Hero = () => {
           Enter the text you want to find the location it came from.
         </p>
 
-        <Textarea></Textarea>
-
-        <Button className="mt-10">
+        <Textarea />
+        <Button className="mt-10" onClick={handlePredict}>
           Get Location <MapPin className="ml-2 h-4 w-4" />
         </Button>
       </div>
 
       <div className="relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-primary bg-cover bg-center">
-        <Map />
+        <Map coordinates={coordinates} />
       </div>
     </section>
   );
