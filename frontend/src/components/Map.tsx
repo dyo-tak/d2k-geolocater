@@ -7,22 +7,19 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ coordinates }) => {
-  const [map, setMap] = useState<any>(null);
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
-    // Update marker position when coordinates change
-    if (map && coordinates) {
-      map.setView([coordinates.latitude, coordinates.longitude], 13);
-    }
-  }, [map, coordinates]);
+    // Update the key to re-create MapContainer when coordinates change
+    setKey((prevKey) => prevKey + 1);
+  }, [coordinates]);
 
   return (
-    <div>
+    <div key={key} className="mt-20">
       <MapContainer
-        center={[0, 0]}
-        zoom={5}
+        center={[coordinates.latitude, coordinates.longitude]}
+        zoom={7}
         style={{ height: "500px", width: "650px", borderRadius: "10px" }}
-        whenCreated={setMap}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
