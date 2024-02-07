@@ -18,9 +18,6 @@ const Hero: React.FC = () => {
   const [enteredText, setEnteredText] = useState("");
 
   const handlePredict = async () => {
-
-
-
     try {
       const response = await fetch("http://localhost:5000/predict", {
         method: "POST",
@@ -49,7 +46,7 @@ const Hero: React.FC = () => {
   return (
     <section className="w-full flex xl:flex-row flex-col justify-center min-h-screen gap-10 max-container">
       <div className="relative xl:w-2/5 flex flex-col justify-center items-start w-full  max-xl:padding-x">
-        <h1 className="font-palanquin text-6xl max-sm:text-[72px] max-sm:leading-[82px] font-bold">
+        <h1 className="font-palanquin text-6xl max-sm:mt-10 max-sm:text-[48px] max-sm:leading-[60px] font-bold">
           <span className="xl:bg-white xl:whitespace-nowrap relative z-10 pr-10">
             Find origin of text
           </span>
@@ -59,13 +56,21 @@ const Hero: React.FC = () => {
           Enter the text you want to find the location it came from.
         </p>
 
-        <Textarea placeholder="Enter your text here" value={enteredText} onChange={e => setEnteredText(e.target.value)} />
+        <Textarea
+          placeholder="Enter your text here"
+          value={enteredText}
+          onChange={(e) => setEnteredText(e.target.value)}
+        />
         <Button className="mt-10" onClick={handlePredict}>
           Get Location <MapPin className="ml-2 h-4 w-4" />
         </Button>
       </div>
 
-      <div className="relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-primary bg-cover bg-center">
+      <div className="sm:hidden">
+        <Map coordinates={coordinates} />
+      </div>
+
+      <div className="max-sm:hidden relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-primary bg-cover bg-center">
         <Map coordinates={coordinates} />
       </div>
     </section>

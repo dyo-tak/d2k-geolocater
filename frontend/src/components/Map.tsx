@@ -15,7 +15,7 @@ const Map: React.FC<MapProps> = ({ coordinates }) => {
   }, [coordinates]);
 
   return (
-    <div key={key} className="mt-20">
+    <div key={key} className="sm:mt-20 overflow-hidden flex items-center">
       <MapContainer
         center={[coordinates.latitude, coordinates.longitude]}
         zoom={5}

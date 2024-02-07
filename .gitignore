@@ -6,8 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+.ipynb_checkpoints
 node_modules
+_pycache_
 dist
 dist-ssr
 *.local
