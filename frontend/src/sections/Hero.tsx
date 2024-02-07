@@ -70,7 +70,7 @@ const Hero: React.FC = () => {
         <Map coordinates={coordinates} />
       </div>
 
-      <div className="max-sm:hidden relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-primary bg-cover bg-center">
+      <div className="max-sm:hidden relative flex-1 flex justify-center items-center xl:min-h-screen max-xl:py-40 bg-[#303436] bg-cover bg-center">
         <Map coordinates={coordinates} />
       </div>
     </section>
