@@ -1,6 +1,3 @@
-import matplotlib.pyplot as plt
-from mpl_toolkits.basemap import Basemap
-
 import math
 import torch
 import torch.distributions as dist
